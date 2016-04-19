@@ -1,4 +1,7 @@
 <?php
+
+namespace PHPCoinAddress;
+
 /* ****************************************************************************
 
 PHPCoinAddress is a PHP object that creates public/private address key pairs for:
@@ -17,11 +20,11 @@ Example Usage:
 require_once 'PHPCoinAddress.php';
 // CoinAddress::set_debug(true);      // optional - show debugging messages
 // CoinAddress::set_reuse_keys(true); // optional - use same key for all addresses
-$coin = CoinAddress::bitcoin();  
+$coin = CoinAddress::bitcoin();
 print 'public (base58): ' . $coin['public'] . "\n";
 print 'public (Hex)   : ' . $coin['public_hex'] . "\n";
 print 'private (WIF)  : ' . $coin['private'] . "\n";
-print 'private (Hex)  : ' . $coin['private_hex'] . "\n"; 
+print 'private (Hex)  : ' . $coin['private_hex'] . "\n";
 
 ****************************************************************************
 Notes:
@@ -55,7 +58,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************** */
 
 // START: Setup
-if( defined('MAX_BASE') && MAX_BASE != 256 ) { 
+if( defined('MAX_BASE') && MAX_BASE != 256 ) {
     print 'ERROR: MAX_BASE must be 256.'; exit;
 } else {
     define('MAX_BASE', 256); // so we can use bcmath_Utils::bin2bc with "base256"
@@ -115,6 +118,7 @@ class gmp_Utils {public static function gmp_mod2($n,$d){if(extension_loaded('gmp
 // START: CoinAddress class
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 class CoinAddress {
 
     public static $debug;
@@ -128,7 +132,7 @@ class CoinAddress {
     public static $key_pair_compressed_private;
     public static $key_pair_compressed_private_hex;
     public static $key_pair_compressed_public;
-    public static $key_pair_compressed_public_hex;    
+    public static $key_pair_compressed_public_hex;
     public static $prefix_private;
     public static $prefix_public;
 
@@ -149,7 +153,7 @@ class CoinAddress {
     //public static function ixcoin() { self::$prefix_public = '0x??'; self::$prefix_private = '0x??'; return self::get_address(); }
     public static function junkcoin() { self::$prefix_public = '0x10'; self::$prefix_private = '0x90'; return self::get_address(); }
     public static function litecoin() { self::$prefix_public = '0x30'; self::$prefix_private = '0xB0'; return self::get_address(); }
-    public static function mincoin() {  self::$prefix_public = '0x32'; self::$prefix_private = '0xB2'; return self::get_address(); }    
+    public static function mincoin() {  self::$prefix_public = '0x32'; self::$prefix_private = '0xB2'; return self::get_address(); }
     public static function namecoin() { self::$prefix_public = '0x34'; self::$prefix_private = '0xB4'; return self::get_address(); }
     public static function novacoin() { self::$prefix_public = '0x08'; self::$prefix_private = '0x88'; return self::get_address(); }
     public static function onecoin() {  self::$prefix_public = '0x73'; self::$prefix_private = '0xF3'; return self::get_address(); }
@@ -179,10 +183,10 @@ class CoinAddress {
     public static function onecoin_testnet() { return self::bitcoin_testnet(); }
     public static function ppcoin_testnet() { return self::bitcoin_testnet(); }
     //public static function royalcoin_testnet(){ return self::bitcoin_testnet(); }
-    public static function smallchange_testnet(){ return self::bitcoin_testnet(); }	
+    public static function smallchange_testnet(){ return self::bitcoin_testnet(); }
     public static function terracoin_testnet(){ return self::bitcoin_testnet(); }
     public static function yacoin_testnet(){ return self::bitcoin_testnet(); }
-	
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static function generic( $prefix_public='', $prefix_private='' ) {
         self::debug("generic: public:$prefix_public private:$prefix_private");

@@ -1,0 +1,15 @@
+{
+    "name": "shayanb/phpcoinaddress",
+    "authors": [
+        {
+            "name": "Anderson Juhasc",
+            "email": "anderson.juhasc@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "PHPCoinAddress": "src/"
+        }
+    }
+}
